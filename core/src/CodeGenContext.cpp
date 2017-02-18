@@ -6,8 +6,6 @@
 */
 
 #include "CodeGenContext.h"
-#include "StringNode.h"
-#include "IDNode.h"
 #include <iostream>
 #include "idtable.h"
 #include "MacroTranslate.h"

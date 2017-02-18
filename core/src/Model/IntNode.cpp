@@ -3,10 +3,10 @@
  */
 
 
-#include "IntNode.h"
+#include "Model/IntNode.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "elegantlist.hpp"
+#include "../../headerlibs/elegantlist.hpp"
 #include "Utils/string_formatter.h"
 /**
  * IntNode implementation

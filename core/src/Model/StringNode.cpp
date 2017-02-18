@@ -6,9 +6,8 @@
 */
 
 
-#include "StringNode.h"
-#include <stdio.h>
-#include "elegantlist.hpp"
+#include "Model/StringNode.h"
+#include "../../headerlibs/elegantlist.hpp"
 #include "Utils/StringEscape.h"
 
 StringNode::StringNode(const char* _value){
@@ -33,7 +32,6 @@ StringNode* StringNode::Create(char _value) {
 
 
 void StringNode::printSelf() {
-	// printf("String %s", value.c_str());
 	Node::el.print("\"" + value + "\"");
 }
 

@@ -6,9 +6,8 @@
 */
 
 #include "CodeGenContext.h"
-#include "StringNode.h"
-#include "IDNode.h"
-#include <stdio.h>
+#include "Model/StringNode.h"
+#include "Model/IDNode.h"
 #include "Pass.h"
 
 extern const FuncReg macro_classes_replace[];

@@ -5,12 +5,12 @@
 * @Last Modified time: 2015-12-10 18:19:23
 */
 
-#include "Node.h"
+#include "Model/Node.h"
 #include <stdarg.h>
 #include <stdio.h>
-#include "nodes.h"
+#include "Model/nodes.h"
 #include <iostream>
-#include "elegantlist.hpp"
+#include "../../headerlibs/elegantlist.hpp"
 
 void Node::init() {
 	next = child = NULL;

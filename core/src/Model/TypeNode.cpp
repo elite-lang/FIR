@@ -5,9 +5,9 @@
 * @Last Modified time: 2015-12-21 17:12:32
 */
 
-#include "TypeNode.h"
+#include "Model/TypeNode.h"
 #include "CodeGenContext.h"
-#include "elegantlist.hpp"
+#include "../../headerlibs/elegantlist.hpp"
 #include <iostream>
 using namespace std;
 

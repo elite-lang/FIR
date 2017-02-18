@@ -11,7 +11,9 @@ extern int yylex();
 extern int yylineno;
 extern char* yytext;
 extern int yyleng;
-extern int waiting_for_semicolon = 0;
+extern int waiting_for_semicolon;
+
+int waiting_for_semicolon = 0;
 
 void yyerror(const char *s);
 

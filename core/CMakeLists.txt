@@ -27,23 +27,17 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 
 # 核心路径配置
-include_directories(include include/Model include/LLCG src src/Utils src/MetaModel src/cJSON
-        src/LLCG/ src/LLCG/LLVMLIB include/elegantlist ${CMAKE_CURRENT_BINARY_DIR})
+include_directories(include src src/Utils src/MetaModel
+        src/LLCG/ src/LLCG/LLVMLIB headerlibs ${CMAKE_CURRENT_BINARY_DIR})
 
 file(GLOB_RECURSE source_files
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Model/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Macro/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Utils/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/MetaModel/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/LLCG/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/LLCG/*/*.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/cJSON/*.c)
-list(REMOVE_ITEM  source_files  ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.cpp)
+list(REMOVE_ITEM  source_files ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
-add_library(${PROJECT_NAME} ${source_files})
+add_library(${PROJECT_NAME}core ${source_files} ${BISON_MyParser_OUTPUTS} ${FLEX_MyScanner_OUTPUTS})
 
-add_executable(${PROJECT_NAME}-run ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${BISON_MyParser_OUTPUTS} ${FLEX_MyScanner_OUTPUTS})
+add_executable(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 
 # Link against LLVM libraries
@@ -62,11 +56,11 @@ llvm_map_components_to_libnames(llvm_libs
 # VERSION 动态库版本
 # SOVERSION API版本
 if (BUILD_SHARED_LIBS)
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH} SOVERSION ${VERSION_MAJOR})
-target_link_libraries(${PROJECT_NAME} ${llvm_libs})
-target_link_libraries(${PROJECT_NAME}-run ${PROJECT_NAME}.${VERSION_MAJOR})
+set_target_properties(${PROJECT_NAME}core PROPERTIES VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH} SOVERSION ${VERSION_MAJOR})
+target_link_libraries(${PROJECT_NAME}core ${llvm_libs})
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}core.${VERSION_MAJOR})
 else()
-target_link_libraries(${PROJECT_NAME}-run ${PROJECT_NAME} ${llvm_libs})
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}core ${llvm_libs})
 endif()
 
 add_subdirectory(runtimeproj)

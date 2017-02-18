@@ -6,10 +6,10 @@
 */
 
 #include "CodeGenContext.h"
-#include "StringNode.h"
+#include "Model/StringNode.h"
 #include "MetaModel/StructModel.h"
 #include "MetaModel/FunctionModel.h"
-#include "nodes.h"
+#include "Model/nodes.h"
 #include "idtable.h"
 #include <iostream>
 

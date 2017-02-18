@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <fstream>
+#include <cstring>
 #include "Model/nodes.h"
 #include "redapple_parser.hpp"
 #include "RedCodeGen.h"
-#include <cstring>
+#include "cmdline.h"
 using namespace std;
-
-const char help_message[] = "welcome for using fir compiler v0.1!\nusage: fir [options] src-files\n";
 
 extern FILE* yyin;
 extern Node *programBlock;
@@ -40,23 +39,35 @@ Node* parseFile(const char* path) {
 	return programBlock;
 }
 
-int main(int argc,const char *argv[])
+int main(int argc, char **argv)
 {
-	if (argc <= 1) printf(help_message);
-	else {
-		const char *file_in_name = argv[1];
-		Node* ans = parseFile(file_in_name);
-		
-		// 语法生成
-		char* output_name = make_default_name(file_in_name);
-		CodeGen* codegen = RedCodeGen::Create();
-		codegen->Init();
-		codegen->PreScan(ans);
-		codegen->Make(ans, output_name);
-		codegen->MakeMeta("meta.bc", "Meta");
-		delete codegen;
-
-		/* you should close the file. */
+	cmdline::parser parser;
+	parser.add("compile", 'c', "compile the fir script");
+	parser.add<string>("out", 'o', "output file path", false, "run");
+	parser.footer("script-file [args...]");
+	parser.set_program_name("fir");
+	parser.parse_check(argc, argv);
+	if (parser.rest().size() == 0) {
+		std::cerr<<parser.usage();
+		exit(0);
 	}
+	for (int i = 0; i < parser.rest().size(); i++)
+		cout << parser.rest()[i] << endl;
+
+
+	string file_in_name = parser.rest()[0];
+	Node* ans = parseFile(file_in_name.c_str());
+
+	// 语法生成
+	char* output_name = make_default_name(file_in_name.c_str());
+	CodeGen* codegen = RedCodeGen::Create();
+	codegen->Init();
+	codegen->PreScan(ans);
+	codegen->Make(ans, output_name);
+	codegen->MakeMeta("meta.bc", "Meta");
+	delete output_name;
+	delete codegen;
+
+	/* you should close the file. */
 	return 0;
 }

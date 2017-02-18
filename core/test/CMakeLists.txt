@@ -9,12 +9,12 @@ add_executable (run_test ${test_source_files})
 
 if(BUILD_SHARED_LIBS)
     target_link_libraries(run_test
-                    ${PROJECT_NAME}
+                    ${PROJECT_NAME}core
                     ${GTEST_BOTH_LIBRARIES}
                     pthread)
 else()
     target_link_libraries(run_test
-                    ${PROJECT_NAME} ${llvm_libs}
+                    ${PROJECT_NAME}core ${llvm_libs}
                     ${GTEST_BOTH_LIBRARIES}
                     pthread)
 endif()

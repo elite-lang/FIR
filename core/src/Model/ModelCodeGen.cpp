@@ -6,7 +6,7 @@
 */
 
 #include "CodeGenContext.h"
-#include "nodes.h"
+#include "Model/nodes.h"
 
 #include <iostream>
 using namespace std;
