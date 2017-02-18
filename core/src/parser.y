@@ -1,31 +1,34 @@
+%start program
+%define api.pure full
+%lex-param {void *scanner}
+%parse-param {void *scanner}{module *mod}
+
+%define parse.trace
+%define parse.error verbose
+
+
 %{
 #include "Model/nodes.h"
 #include <list>
+#include "module.h"
+#include "parser.hpp"
+#include "scanner.h"
 using namespace std;
 
-#define YYERROR_VERBOSE 1
-
-Node *programBlock; /* the top level root node of our final AST */
-
-extern int yylex();
-extern int yylineno;
-extern char* yytext;
-extern int yyleng;
-extern int waiting_for_semicolon;
-
-int waiting_for_semicolon = 0;
-
-void yyerror(const char *s);
+void yyerror (yyscan_t locp, module *mod, char const *msg);
 
 %}
 
-
+%code requires
+{
+#include "module.h"
+}
 
 /* Represents the many different ways we can access our data */
 
 %union {
     Node *nodes;
-    char *str;
+    const char *str;
     int token;
 }
 
@@ -106,11 +109,11 @@ void yyerror(const char *s);
 %left '(' '[' ')' ']'
 %left MBK '@'
 
-%start program
+
 
 %%
 
-program : def_statements { programBlock = Node::getList($1); }
+program : def_statements { mod->root = Node::getList($1); }
         ;
 
 def_module_statement : KWS_STRUCT ID '{' def_statements '}' { $$ = Node::make_list(3, IDNode::Create($1), IDNode::Create($2), $4); }
@@ -309,9 +312,7 @@ full_list : '(' list ')' { $$ = Node::Create($2); }
           ;
 %%
 
-void yyerror(const char* s){
-    fprintf(stderr, "%s \n", s);
-    fprintf(stderr, "line %d: ", yylineno);
-    fprintf(stderr, "text %s \n", yytext);
+void yyerror (yyscan_t locp, module *mod, char const *msg) {
+	fprintf(stderr, "--> %s\n", msg);
     exit(1);
 }

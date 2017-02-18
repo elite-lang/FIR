@@ -198,11 +198,11 @@ public:
 	bool isCharNode();
 	bool isTypeNode();
 
-
+	virtual ~Node();
 protected:
 	Node();
 	Node(Node* n);
-	virtual ~Node();
+
 
 	virtual void printSelf();
 	void init();

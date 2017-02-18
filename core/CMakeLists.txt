@@ -19,10 +19,10 @@ set(LLVM_BUILD_TOOLS OFF)
 find_package(BISON)
 find_package(FLEX)
 
-FLEX_TARGET(MyScanner ${CMAKE_CURRENT_SOURCE_DIR}/src/redapple_lex.l
-        ${CMAKE_CURRENT_BINARY_DIR}/redapple_lex.cpp COMPILE_FLAGS -w)
-BISON_TARGET(MyParser ${CMAKE_CURRENT_SOURCE_DIR}/src/redapple_parser.y
-        ${CMAKE_CURRENT_BINARY_DIR}/redapple_parser.cpp)
+FLEX_TARGET(MyScanner ${CMAKE_CURRENT_SOURCE_DIR}/src/lex.l
+        ${CMAKE_CURRENT_BINARY_DIR}/lex.cpp DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/scanner.h)
+BISON_TARGET(MyParser ${CMAKE_CURRENT_SOURCE_DIR}/src/parser.y
+        ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp COMPILE_FLAGS -d)
 ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 

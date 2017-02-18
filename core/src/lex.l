@@ -4,18 +4,16 @@
 #include <list>
 using namespace std;
 
-#include "redapple_parser.hpp"
+#include "parser.hpp"
 
-#define SAVE_TOKEN     yylval.str = maketoken(yytext, yyleng)
-#define SAVE_STRING    yylval.str = maketoken(yytext, yyleng)
-#define SAVE_STRING_NC yylval.str = maketoken(yytext, yyleng)
-extern "C" int yywrap() { return 1; }
+#define SAVE_TOKEN     yylval->str = maketoken(yytext, yyleng)
+#define SAVE_STRING    yylval->str = maketoken(yytext, yyleng)
+#define SAVE_STRING_NC yylval->str = maketoken(yytext, yyleng)
 char* maketoken(const char* data, int len);
-extern int waiting_for_semicolon;
 %}
 
 %option yylineno
-
+%option reentrant bison-bridge noyywrap
 %%
 
 "/*"([^\*]|(\*)*[^\*/])*(\*)*"*/" ; /* 就是这种注释 */
@@ -139,7 +137,7 @@ extern int waiting_for_semicolon;
 
 "static"|"extern"|"virtual"|"abstract"        SAVE_TOKEN; return KWS_FUNC_XS; /* 函数修饰符 */
 
-"var"|"auto"            SAVE_TOKEN; return KWS_TYPE; /* 基本类型 */
+"var"|"let"             SAVE_TOKEN; return KWS_TYPE; /* 基本类型 */
 
 [a-zA-Z_][a-zA-Z0-9_]*  SAVE_TOKEN; return ID; /* 标识符 */
 

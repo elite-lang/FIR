@@ -1,14 +1,12 @@
 #include <stdio.h>
-#include <fstream>
 #include <cstring>
 #include "Model/nodes.h"
-#include "redapple_parser.hpp"
 #include "RedCodeGen.h"
 #include "cmdline.h"
+#include "fir.h"
 using namespace std;
 
-extern FILE* yyin;
-extern Node *programBlock;
+
 
 char* make_default_name(const char* filename) {
 	int size = 0;
@@ -22,22 +20,7 @@ char* make_default_name(const char* filename) {
 	return str;
 }
 
-Node* parseFile(const char* path) {
-	FILE* file_in;
-	if ((file_in = fopen(path, "r")) == NULL) {
-		printf("找不到程序源文件: %s\n", path);
-		return 0;
-	}
-	
-	yyin = file_in;
-	yyparse();
-	fclose(file_in);
 
-	// 打印语法树
-	printf("源文件 - %s\n", path);
-	programBlock->print(0);
-	return programBlock;
-}
 
 int main(int argc, char **argv)
 {
