@@ -34,10 +34,12 @@ LValue llcg_llvm::FuncType(LValue ret_type, vector<LValue>& types, bool isNotSur
 	}
 	FunctionType* func_type = FunctionType::get(*ret, malloc_type,
 		/*vararg*/isNotSure);
+    assert(func_type != nullptr);
 	return LValue(new llvm_type(func_type));
 }
 
 LValue llcg_llvm::GetOrInsertFunction(FunctionModel* fmodel) {
+    printf("函数未实现");
 	return nullptr;
 } // 返回Function
 
@@ -45,10 +47,12 @@ LValue llcg_llvm::GetOrInsertFunction(const string& name, LValue func_type) {
 	LLVMType _func_type = LLTYPE(func_type);
 	Type* t = *_func_type;
 	Constant* f = M->getOrInsertFunction(name, dyn_cast<FunctionType>(t));
+    assert(f != nullptr);
 	return LValue(new llvm_value(f));
 }
 
 LValue llcg_llvm::GetOrInsertFunction(const string& name, LValue ret_type, vector<LValue>& types, bool isNotSure) {
+    printf("函数未实现");
 	return nullptr;
 }
 
@@ -72,7 +76,8 @@ void   llcg_llvm::FunctionBodyEnd() {
 
 LValue llcg_llvm::getFunction(const string& name) {
 	Function* f = M->getFunction(name);
-	return LValue(new llvm_value(f));
+    assert(f != nullptr);
+    return LValue(new llvm_value(f));
 }
 
 LValue llcg_llvm::Call(FunctionModel* fmodel, vector<LValue>& args) {
@@ -528,15 +533,17 @@ LValue llcg_llvm::Void() {
 }
 
 
-Constant* llcg_llvm::geti8StrVal(Module& M, char const* str, Twine const& name) {
+Constant* llcg_llvm::geti8StrVal(Module& M, char const* str, Twine const& name = "") {
     LLVMContext& ctx = M.getContext(); // 千万别用Global Context
-    Constant* strConstant = ConstantDataArray::getString(ctx, str);
+    Constant* strConstant = ConstantDataArray::getString(ctx, str, true);
+
     GlobalVariable* GVStr =
         new GlobalVariable(M, strConstant->getType(), true,
                            GlobalValue::InternalLinkage, strConstant, name);
     Constant* zero = Constant::getNullValue(IntegerType::getInt32Ty(ctx));
+    Constant* zero2 = Constant::getNullValue(IntegerType::getInt32Ty(ctx));
     vector<Constant*> indices = {zero, zero};
-	Constant* strVal = ConstantExpr::getGetElementPtr(GVStr->getType(), GVStr, indices, true);
+	Constant* strVal = ConstantExpr::getGetElementPtr(GVStr->getType()->getPointerElementType(), GVStr, indices, true);
     return strVal;
 }
 
@@ -549,7 +556,7 @@ Constant* llcg_llvm::getPtrArray(Module& M, vector<Constant*>& args_list) {
                            GlobalValue::InternalLinkage, strConstant, "");
     Constant* zero = Constant::getNullValue(IntegerType::getInt32Ty(ctx));
     vector<Constant*> indices = {zero, zero};
-	Constant* strVal = ConstantExpr::getGetElementPtr(GVStr->getType(), GVStr, indices, true);
+	Constant* strVal = ConstantExpr::getGetElementPtr(GVStr->getType()->getPointerElementType(), GVStr, indices, true);
 	return strVal;
 }
 
@@ -687,7 +694,7 @@ void llcg_llvm::MakeMetaList(vector<string>& list) {
 	Function* F = M->getFunction("elite_meta_init");
 	vector<Constant*> args_list;
 	for (int i = 0; i < list.size(); ++i) {
-		args_list.push_back(geti8StrVal(*M, list[i].c_str(), ""));
+		args_list.push_back(geti8StrVal(*M, list[i].c_str(), "i"));
 	}
 	args_list.push_back(Constant::getNullValue(Type::getInt8PtrTy(M->getContext())));
 	BasicBlock& bb = F->getEntryBlock();
@@ -703,7 +710,7 @@ void llcg_llvm::MakeMetaList(const string& name, vector<string>& list, LValue fp
 	Function* F = M->getFunction("elite_meta_init");
 	vector<Constant*> args_list;
 	for (int i = 0; i < list.size(); ++i) {
-		args_list.push_back(geti8StrVal(*M, list[i].c_str(), ""));
+		args_list.push_back(geti8StrVal(*M, list[i].c_str()));
 		// Constant* c = init_list[i];
 		// if (c != NULL)
 		// 	init_meta_list.push_back(ConstantAsMetadata::get(c));
