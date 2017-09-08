@@ -37,7 +37,6 @@ int main(int argc, char **argv)
 	for (int i = 0; i < parser.rest().size(); i++)
 		cout << parser.rest()[i] << endl;
 
-
 	string file_in_name = parser.rest()[0];
 	Node* ans = parseFile(file_in_name.c_str());
 
@@ -46,8 +45,8 @@ int main(int argc, char **argv)
 	CodeGen* codegen = RedCodeGen::Create();
 	codegen->Init();
 	codegen->PreScan(ans);
-	codegen->Make(ans, output_name);
-	codegen->MakeMeta("meta.bc", "Meta");
+	codegen->Make(ans, output_name, "main");
+	codegen->MakeMeta("meta.bc", "meta");
 	delete output_name;
 	delete codegen;
 

@@ -103,9 +103,9 @@ public:
 protected:
 
 	// 当前的LLVM Module
-	unique_ptr<Module> M;
+	Module* M;
 	// 模块元数据 Module
-	unique_ptr<Module> meta_M;
+	Module* meta_M;
 
 	LLVMContext context;
 	Function* nowFunc;

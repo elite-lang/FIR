@@ -13,7 +13,7 @@
 #include <fstream>
 using namespace std;
 llcg_llvm::llcg_llvm() {
-	meta_M = llvm::make_unique<Module>("", context);
+	meta_M = new Module("", context);
 	register_metalib();
 }
 
@@ -570,8 +570,8 @@ LValue llcg_llvm::ConstDouble(double num) {
 extern const LibFunc stdlibs[];
 
 void llcg_llvm::BeginModule(const string& name) {
-	M = llvm::make_unique<Module>(name, context);
-	register_stdlib(M.get(), stdlibs);
+	M = new Module(name, context);
+	register_stdlib(M, stdlibs);
 	nowBlock = NULL;
 	nowFunc = NULL;
 }
@@ -586,7 +586,7 @@ void llcg_llvm::register_stdlib(Module* M, const LibFunc* libs_func) {
 extern const LibFunc metalibs[];
 
 void llcg_llvm::register_metalib() {
-	register_stdlib(meta_M.get(), metalibs);
+	register_stdlib(meta_M, metalibs);
 }
 
 void llcg_llvm::SetNowBasicBlock(LValue nowBlock) {
@@ -610,7 +610,7 @@ LValue llcg_llvm::CreateBasicBlock(LValue func) {
 }
 
 void llcg_llvm::VerifyAndWrite(const string& outfile_name) {
-	verifyModuleAndWrite(M.get(), outfile_name);
+	verifyModuleAndWrite(M, outfile_name);
 }
 
 void llcg_llvm::verifyModuleAndWrite(llvm::Module* M, const string& outfile_name) {
@@ -639,7 +639,7 @@ void llcg_llvm::verifyModuleAndWrite(llvm::Module* M, const string& outfile_name
 }
 
 void llcg_llvm::MakeMetaModule(const string& outfile_name, const string& module_name) {
-	Module* M = meta_M.get();
+	Module* M = meta_M;
     M->setModuleIdentifier(module_name);
 
     Function *F = M->getFunction("elite_meta_init");
@@ -683,7 +683,7 @@ BasicBlock* llcg_llvm::createBlock(Function* f) {
 }
 
 void llcg_llvm::MakeMetaList(vector<string>& list) {
-	Module* M = meta_M.get();
+	Module* M = meta_M;
 	Function* F = M->getFunction("elite_meta_init");
 	vector<Constant*> args_list;
 	for (int i = 0; i < list.size(); ++i) {
@@ -699,7 +699,7 @@ void llcg_llvm::MakeMetaList(vector<string>& list) {
 }
 
 void llcg_llvm::MakeMetaList(const string& name, vector<string>& list, LValue fp) {
-	Module* M = meta_M.get();
+	Module* M = meta_M;
 	Function* F = M->getFunction("elite_meta_init");
 	vector<Constant*> args_list;
 	for (int i = 0; i < list.size(); ++i) {

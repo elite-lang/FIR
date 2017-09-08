@@ -60,7 +60,7 @@ set_target_properties(${PROJECT_NAME}core PROPERTIES VERSION ${VERSION_MAJOR}.${
 target_link_libraries(${PROJECT_NAME}core ${llvm_libs})
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}core.${VERSION_MAJOR})
 else()
-target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}core ${llvm_libs})
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}core ${llvm_libs} pthread)
 endif()
 
 add_subdirectory(runtimeproj)
