@@ -8,6 +8,7 @@ extern "C" {
 
 typedef struct {
 	FILE *src;
+	char* buffer;
 	Node *root;
 } module;
 

@@ -9,9 +9,17 @@
 
 extern "C" {
 
+
 extern Node* parseFile(const char* path);
 
+extern struct FirVM* createVM();
+extern void deleteVM(struct FirVM*);
 
+extern bool loadNode(struct FirVM*, Node*);
+
+extern bool loadFile(struct FirVM*, const char* path);
+
+extern int runMain(struct FirVM*);
 
 
 };

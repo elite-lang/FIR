@@ -1,8 +1,6 @@
 #include "module.h"
 #include "parser.hpp"
 #include "scanner.h"
-#include <fstream> // for std::ofstream
-#include <sstream> // for std::stringstream
 
 extern "C" {
 
@@ -19,6 +17,7 @@ new_module_from_file(FILE *file)
 {
 	module *mod = (module *) malloc(sizeof(module));
 	mod->src = file;
+	mod->buffer = NULL;
 	return mod;
 }
 
@@ -26,8 +25,8 @@ module *
 new_module_from_string(char *src)
 {
 	module *mod = (module *) malloc(sizeof(module));
-	// TODO: using sstream
-	// mod->src = fmemopen(src, strlen(src)+1, "r");
+	mod->src = NULL;
+	mod->buffer = src;
 	return mod;
 }
 
@@ -37,7 +36,7 @@ delete_module(module *mod)
 	if (mod->root != NULL) {
 		delete mod->root;
 	}
-	fclose(mod->src);
+	if (mod->src != NULL) fclose(mod->src);
 	free(mod);
 }
 
@@ -46,12 +45,20 @@ parse_module(module *mod)
 {
 	yyscan_t sc;
 	int res;
-
 	yylex_init(&sc);
-	yyset_in(mod->src, sc);
-	res = yyparse(sc, mod);
+	if (mod->src) {
+		yyset_in(mod->src, sc);
+		res = yyparse(sc, mod);
+	} else if (mod->buffer) {
+		YY_BUFFER_STATE buffer = yy_scan_string(mod->buffer, sc);
+		res = yyparse(sc, mod);
+		yy_delete_buffer(buffer, sc);
+	} else {
+		printf("module 异常");
+		exit(1);
+	}
 	yylex_destroy(sc);
-
+	
 	return res;
 }
 

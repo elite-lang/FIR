@@ -25,7 +25,25 @@ Node* parseFile(const char* path) {
 }
 
 
+struct FirVM {
+    
+};
 
+struct FirVM* createVM() {
+    return new FirVM();
+}
+
+void deleteVM(struct FirVM* vm) {
+    delete vm;
+}
+
+bool loadNode(struct FirVM* vm, Node* node) {
+    
+}
+
+extern bool loadFile(struct FirVM* vm, const char* path);
+
+extern int runMain(struct FirVM* vm);
 
 
 

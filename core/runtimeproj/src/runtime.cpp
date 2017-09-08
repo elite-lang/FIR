@@ -145,9 +145,6 @@ extern "C" {
 }
 
 
-
-
-
 void EliteMeta::RegFunction(string& name, string& ret_type,
 	vector<string>& type_list, vector<string>& name_list, void* fptr) {
 	FunctionMeta* fm = new FunctionMeta();
