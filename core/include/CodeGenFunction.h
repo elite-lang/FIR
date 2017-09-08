@@ -6,11 +6,11 @@
 */
 
 
-#ifndef CODE_GEN_FUNCTION_H
-#define CODE_GEN_FUNCTION_H
-
+#pragma once
 
 #include "ICodeGenFunction.h"
+
+namespace fir {
 
 /**
  * @brief 定义宏翻译函数指针
@@ -44,4 +44,4 @@ typedef struct _funcReg
 
 
 
-#endif // CODE_GEN_FUNCTION_H
+}

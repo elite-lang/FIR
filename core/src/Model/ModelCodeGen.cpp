@@ -11,6 +11,7 @@
 #include <iostream>
 using namespace std;
 
+namespace fir {
 
 LValue Node::codeGen(CodeGenContext* context) {
 	return context->MacroMake(this);
@@ -40,3 +41,4 @@ LValue IDNode::codeGen(CodeGenContext* context) {
 }
 
 
+}

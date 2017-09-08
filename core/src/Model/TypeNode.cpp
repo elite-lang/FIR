@@ -9,7 +9,12 @@
 #include "CodeGenContext.h"
 #include "../../headerlibs/elegantlist.hpp"
 #include <iostream>
+
 using namespace std;
+using namespace fir;
+
+namespace fir {
+	
 
 TypeNode* TypeNode::Create(const char* name, bool is_const, bool is_source) {
 	return new TypeNode(name, is_const, is_source);
@@ -58,4 +63,6 @@ TypeNode::TypeNode(const char* name, bool is_const, bool is_source) {
 	if (is_source) {
 		this->str.insert(str.begin(), '*');
 	}
+}
+
 }

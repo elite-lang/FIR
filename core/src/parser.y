@@ -14,6 +14,7 @@
 #include "parser.hpp"
 #include "scanner.h"
 using namespace std;
+using namespace fir;
 
 void yyerror (yyscan_t locp, module *mod, char const *msg);
 
@@ -27,7 +28,7 @@ void yyerror (yyscan_t locp, module *mod, char const *msg);
 /* Represents the many different ways we can access our data */
 
 %union {
-    Node *nodes;
+    fir::Node *nodes;
     const char *str;
     int token;
 }

@@ -4,6 +4,7 @@
 #include "idmap.h"
 using namespace std;
 
+namespace fir {
 
 /**
  * @brief 简易栈式符号表，需要在进入函数后手动压栈等操作
@@ -58,3 +59,4 @@ private:
     deque<IDMap> ID_stack;
 };
 
+}

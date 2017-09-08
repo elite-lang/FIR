@@ -5,6 +5,8 @@
 #include <string>
 #include "idmap.h"
 
+namespace fir {
+
 class MapModel : public MetaModel {
 public:
     MapModel (const string& name);
@@ -18,3 +20,4 @@ protected:
 
 };
 
+}

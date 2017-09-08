@@ -4,9 +4,7 @@
 * @Last Modified by:   sxf
 * @Last Modified time: 2015-12-14 17:09:06
 */
-
-#ifndef MACRO_TRANSLATE_H
-#define MACRO_TRANSLATE_H
+#pragma once
 
 #include <string>
 #include <map>
@@ -14,6 +12,8 @@
 
 using namespace std;
 
+namespace fir {
+	
 /**
  * @brief 宏翻译器, 可以支持用户自定义宏
  * @details 宏翻译器, 应该说是宏展开器, 能够根据用户的定义, 
@@ -29,6 +29,5 @@ private:
 	map< string, Node* > args_map;
 };
 
+}
 
-
-#endif // MACRO_TRANSLATE_H

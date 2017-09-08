@@ -5,11 +5,12 @@
 * @Last Modified time: 2015-12-24 08:58:15
 */
 
-#ifndef I_CODE_GEN_FUNCTION_H
-#define I_CODE_GEN_FUNCTION_H
-
+#pragma once
 #include "Model/Node.h"
 #include "LLCG/llcg.h"
+
+namespace fir {
+
 class CodeGenContext;
 
 class ICodeGenFunction
@@ -19,4 +20,4 @@ public:
 };
 
 
-#endif // I_CODE_GEN_FUNCTION_H
+}

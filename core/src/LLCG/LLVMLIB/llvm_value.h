@@ -9,14 +9,16 @@
 
 #include "LLCG/lvalue.h"
 
-class llvm_value;
-
-typedef llvm_value* LLVMValue;
-#define LLVALUE(T) (dynamic_cast<llvm_value*>(T))
-
 namespace llvm {
 	class Value;
 } // llvm
+
+namespace fir {
+
+class llvm_value;
+typedef llvm_value* LLVMValue;
+#define LLVALUE(T) (dynamic_cast<fir::llvm_value*>(T))
+
 
 class llvm_value : public lvalue
 {
@@ -33,3 +35,4 @@ private:
 
 
 
+}

@@ -10,6 +10,8 @@
 #include "Model/IDNode.h"
 #include "Pass.h"
 
+namespace fir {
+
 extern const FuncReg macro_classes_replace[];
 
 static LValue class_macro(CodeGenContext* context, Node* node) {
@@ -57,3 +59,5 @@ extern const FuncReg macro_classes[] = {
 	{"module",   module_macro},
 	{NULL, NULL}
 };
+
+}

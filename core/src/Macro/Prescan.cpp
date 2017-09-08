@@ -13,6 +13,8 @@
 #include "idtable.h"
 #include <stdio.h>
 
+namespace fir {
+
 static LValue function_macro(CodeGenContext* context, Node* node) {
 		// 第一个参数, 返回类型
 	std::string ret_type = node->getStr();
@@ -116,3 +118,5 @@ const FuncReg macro_defmacro[] = {
 	{"defmacro",   defmacro_macro},
 	{NULL, NULL}
 };
+
+}

@@ -2,14 +2,14 @@
 #define __MODULE_H
 
 #include <stdio.h>
-#include "Model/nodes.h"
+#include "Model/Node.h"
 
 extern "C" {
 
 typedef struct {
 	FILE *src;
 	char* buffer;
-	Node *root;
+	fir::Node *root;
 } module;
 
 module *new_module_from_stdin();

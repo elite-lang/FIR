@@ -1,6 +1,8 @@
 
 #include "Pass.h"
 
+namespace fir {
+
 Pass::Pass (const FuncReg* macro_funcs) {
 	AddOrReplaceMacros(macro_funcs);
 }
@@ -56,4 +58,6 @@ void Pass::SaveMacros() {
 void Pass::RecoverMacros() {
 	macro_map = macro_save_stack.top();
 	macro_save_stack.pop();
+}
+
 }

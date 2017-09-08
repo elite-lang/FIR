@@ -1,5 +1,4 @@
-#ifndef ICODE_GEN_CONTEXT_H
-#define ICODE_GEN_CONTEXT_H
+#pragma once 
 
 #include <map>
 #include <stack>
@@ -11,6 +10,8 @@ using namespace std;
 #include "MetaModel/FunctionModel.h"
 #include "MetaModel/MacroModel.h"
 #include "CodeGenFunction.h"
+
+namespace fir {
 
 class Node;
 class Pass;
@@ -89,4 +90,4 @@ public:
 };
 
 
-#endif /* end of include guard: ICODE_GEN_CONTEXT_H */
+}

@@ -8,6 +8,10 @@
 #include "LLCG/llcg.h"
 #include "llcg_llvm.h"
 
+namespace fir {
+	
 llcg* llcg::CreateLLVM() {
 	return new llcg_llvm();
+}
+
 }

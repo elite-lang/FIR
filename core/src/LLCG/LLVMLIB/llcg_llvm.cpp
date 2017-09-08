@@ -12,6 +12,9 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
+namespace fir {
+
 llcg_llvm::llcg_llvm() {
 	meta_M = new Module("", context);
 	register_metalib();
@@ -766,3 +769,5 @@ void llcg_llvm::CloseTerminator(LValue basicblock, LValue target) {
 
 FunctionType* llcg_llvm::malloc_type = NULL;
 FunctionType* llcg_llvm::malloc_array_type = NULL;
+
+}

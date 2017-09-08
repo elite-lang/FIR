@@ -5,10 +5,11 @@
 #include "fir.h"
 #include <fstream>
 #include "module.h"
+#include "Model/Node.h"
 
 extern "C" {
 
-Node* parseFile(const char* path) {
+fir::Node* parseFile(const char* path) {
     FILE* file_in;
     if ((file_in = fopen(path, "r")) == NULL) {
         printf("找不到程序源文件: %s\n", path);
@@ -37,13 +38,17 @@ void deleteVM(struct FirVM* vm) {
     delete vm;
 }
 
-bool loadNode(struct FirVM* vm, Node* node) {
+bool loadNode(struct FirVM* vm, fir::Node* node) {
     
 }
 
-extern bool loadFile(struct FirVM* vm, const char* path);
+bool loadFile(struct FirVM* vm, const char* path) {
 
-extern int runMain(struct FirVM* vm);
+}
+
+int runMain(struct FirVM* vm) {
+
+}
 
 
 

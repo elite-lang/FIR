@@ -3,7 +3,7 @@
 #include "Model/nodes.h"
 #include <list>
 using namespace std;
-
+using namespace fir;
 #include "parser.hpp"
 
 #define SAVE_TOKEN     yylval->str = maketoken(yytext, yyleng)

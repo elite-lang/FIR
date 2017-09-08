@@ -3,10 +3,10 @@
  */
 
 
-#ifndef _INTNODE_H
-#define _INTNODE_H
-
+#pragma once
 #include "Node.h"
+
+namespace fir {
 
 class IntNode: public Node {
 public: 
@@ -22,4 +22,4 @@ protected:
 	int value;
 };
 
-#endif //_INTNODE_H
+}

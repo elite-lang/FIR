@@ -1,5 +1,4 @@
-#ifndef PASS_MANAGER_H
-#define PASS_MANAGER_H
+#pragma once
 
 #include "Pass.h"
 #include <vector>
@@ -7,6 +6,8 @@
 #include <string>
 #include <set>
 using namespace std;
+
+namespace fir {
 
 class ICodeGenContext;
 
@@ -37,4 +38,4 @@ protected:
 };
 
 
-#endif /* end of include guard: PASS_MANAGER_H */
+}

@@ -5,17 +5,15 @@
 #ifndef FIR_FIR_H
 #define FIR_FIR_H
 
-#include "Model/Node.h"
-
+#include "Model/nodes.h"
 extern "C" {
 
-
-extern Node* parseFile(const char* path);
+extern fir::Node* parseFile(const char* path);
 
 extern struct FirVM* createVM();
 extern void deleteVM(struct FirVM*);
 
-extern bool loadNode(struct FirVM*, Node*);
+extern bool loadNode(struct FirVM*, fir::Node*);
 
 extern bool loadFile(struct FirVM*, const char* path);
 

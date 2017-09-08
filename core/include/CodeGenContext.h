@@ -7,11 +7,11 @@
 * 代码生成的上下文类, 是C实现宏的最核心功能类
 */
 
-#ifndef CODE_GEN_CONTENT_H
-#define CODE_GEN_CONTENT_H
+#pragma once
 
 #include "ICodeGenContext.h"
 
+namespace fir {
 
 /**
  * @brief 代码生成上下文, 是代码生成中的关键信息存储类
@@ -120,4 +120,4 @@ private:
 };
 
 
-#endif // CODE_GEN_CONTENT_H
+}

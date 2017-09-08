@@ -3,11 +3,10 @@
  */
 
 
-#ifndef _BYTENODE_H
-#define _BYTENODE_H
-
+#pragma once
 #include "Node.h"
 
+namespace fir {
 
 class ByteNode: public Node {
 public: 
@@ -15,5 +14,4 @@ public:
 
 	// virtual Value* codeGen(CodeGenContext* context); 
 };
-
-#endif //_BYTENODE_H
+}

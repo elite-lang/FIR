@@ -1,5 +1,7 @@
 #include "idtable.h"
 
+namespace fir {
+
 IDTable::IDTable()
 {
     ID_stack.push_back(IDMap());
@@ -37,4 +39,6 @@ void IDTable::pop() {
 
 int IDTable::getLevel() {
     return ID_stack.size()-1;
+}
+
 }

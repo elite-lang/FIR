@@ -7,6 +7,7 @@
 
 #include "llcg_llvm.h"
 
+namespace fir {
 
 static void register_printf(llvm::Module *module) {
     std::vector<llvm::Type*> printf_arg_types;
@@ -122,3 +123,5 @@ extern const LibFunc metalibs[] = {
 	register_elite_meta_init,
 	NULL
 };
+
+}

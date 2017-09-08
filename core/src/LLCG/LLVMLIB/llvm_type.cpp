@@ -10,6 +10,8 @@
 #include "llvm/Support/raw_ostream.h"
 using namespace llvm;
 
+namespace fir {
+
 llvm_type::llvm_type(llvm::Type* v) {
 	data = v;
 }
@@ -34,4 +36,6 @@ string llvm_type::getTypeName() {
 LValue llvm_type::getPointerTo() {
 	Type* t = data->getPointerTo();
 	return LValue(new llvm_type(t));
+}
+
 }

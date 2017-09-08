@@ -11,6 +11,7 @@
 #include <string>
 #include "LLCG/lvalue.h"
 
+namespace fir {
 
 
 enum MetaType
@@ -40,3 +41,4 @@ protected:
 	std::string name;
 };
 
+}

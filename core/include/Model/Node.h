@@ -5,13 +5,14 @@
 * @Last Modified time: 2015-12-14 17:03:53
 */
 
-#ifndef NODE_H
-#define NODE_H
-
+#pragma once
 #include <string>
 #include "LLCG/lvalue.h"
 
 class ElegantList;
+
+
+namespace fir {
 
 enum NodeType
 {
@@ -214,4 +215,4 @@ protected:
 };
 
 
-#endif // NODE_H
+}

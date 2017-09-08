@@ -7,6 +7,8 @@
 
 #include "MacroTranslate.h"
 
+namespace fir {
+
 Node* MacroTranslate::Marco(Node* node_template, Node* args) {
 	// 第一个参数 宏参数表
 	Node* node = node_template->getChild();
@@ -50,4 +52,6 @@ Node* MacroTranslate::findArg(const string& name) {
 	auto p = args_map.find(name);
 	if (p == args_map.end()) return NULL;
 	return p->second;
+}
+
 }

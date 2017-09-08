@@ -13,6 +13,8 @@
 
 using namespace std;
 
+namespace fir {
+
 class lvalue;
 typedef lvalue* LValue;
 
@@ -45,3 +47,4 @@ public:
 
 };
 
+}

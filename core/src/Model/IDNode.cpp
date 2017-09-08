@@ -10,6 +10,9 @@
  * IDNode implementation
  */
 
+namespace fir {
+	
+
 IDNode* IDNode::Create(const char* _value) {
 	return new IDNode(_value);
 }
@@ -32,4 +35,6 @@ void IDNode::printSelf() {
 
 NodeType IDNode::getType() {
 	return id_node_t;
+}
+
 }

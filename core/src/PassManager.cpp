@@ -1,7 +1,7 @@
 
 #include "PassManager.h"
 #include "ICodeGenContext.h"
-
+namespace fir {
 
 PassManager::PassManager () {
 
@@ -65,4 +65,6 @@ void PassManager::LoadDefaultLists() {
     list<Pass*> main = { new Pass(macro_funcs, macro_classes) };
     NewPassList("prescan", prescan);
     NewPassList("main", main);
+}
+
 }

@@ -7,13 +7,13 @@
 * 代码生成部分的引导类
 */
 
-#ifndef RED_CODE_GEN_H
-#define RED_CODE_GEN_H
+#pragma once
 
 #include "Model/Node.h"
 #include "CodeGen.h"
 #include "PassManager.h"
 
+namespace fir {
 
 class CodeGenContext;
 class RedCodeGen : public CodeGen
@@ -37,4 +37,4 @@ private:
 
 
 
-#endif // RED_CODE_GEN_H
+}

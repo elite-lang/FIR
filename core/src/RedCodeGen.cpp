@@ -5,15 +5,17 @@
 * @Last Modified time: 2015-11-25 22:03:20
 */
 
-#include "RedCodeGen.h"
-#include "idtable.h"
 #include <string>
 #include <map>
 #include <vector>
 #include <set>
+#include "RedCodeGen.h"
+#include "idtable.h"
+#include "CodeGenContext.h"
+
 using namespace std;
 
-#include "CodeGenContext.h"
+namespace fir {
 
 RedCodeGen::RedCodeGen() {
 
@@ -64,4 +66,6 @@ void RedCodeGen::Make(Node* node, const char* outfile_name, const char* module_n
     string out_name = outfile_name;
     context->getLLCG()->VerifyAndWrite(out_name);
     context->st->pop();   // 离开该文件符号表
+}
+
 }

@@ -12,6 +12,9 @@
 #include <iostream>
 #include "../../headerlibs/elegantlist.hpp"
 
+namespace fir {
+	
+
 void Node::init() {
 	next = child = NULL;
 }
@@ -234,3 +237,5 @@ std::string& Node::getStr() {
 }
 
 ElegantList Node::el;
+
+}

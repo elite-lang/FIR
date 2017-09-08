@@ -10,6 +10,8 @@
 #include <vector>
 #include <string>
 
+namespace fir {
+
 /**
  * @brief 结构体类型元类型
  */
@@ -34,3 +36,4 @@ private:
 	LValue struct_type;
 };
 
+}

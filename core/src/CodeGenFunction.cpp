@@ -8,6 +8,9 @@
 #include "CodeGenFunction.h"
 #include "CodeGenContext.h"
 
+
+namespace fir {
+
 CodeGenFunction::CodeGenFunction() {
 }
 
@@ -34,3 +37,4 @@ CodeGenCFunction CodeGenFunction::getCFunc() {
 	return this->cfunc;
 }
 
+}

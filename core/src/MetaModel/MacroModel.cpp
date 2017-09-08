@@ -7,6 +7,9 @@
 
 #include "MetaModel/MacroModel.h"
 
+using namespace fir;
+namespace fir {
+
 MacroModel::MacroModel(const std::string& name, Node* node) : MetaModel(name) {
 	this->node = node;
 }
@@ -31,4 +34,6 @@ void MacroModel::genMetaCode(CodeGenContext* context) {
 
 MetaType MacroModel::getMetaType() {
 	return macro_meta_t;
+}
+
 }

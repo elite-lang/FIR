@@ -9,6 +9,9 @@
 #include "CodeGenContext.h"
 #include "idtable.h"
 
+using namespace fir;
+namespace fir {
+
 FunctionModel::FunctionModel(
 	std::string& 			  name,
 	std::string& 			  ret_type,
@@ -74,4 +77,6 @@ void FunctionModel::genMetaCode(CodeGenContext* context) {
 
 MetaType FunctionModel::getMetaType() {
 	return function_meta_t;
+}
+
 }

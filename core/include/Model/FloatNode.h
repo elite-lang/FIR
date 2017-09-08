@@ -3,12 +3,13 @@
  */
 
 
-#ifndef _FLOATNODE_H
-#define _FLOATNODE_H
-
+#pragma once
+ 
 #include "Node.h"
 #include <string>
 using namespace std;
+
+namespace fir {
 
 class FloatNode: public Node {
 public:
@@ -25,4 +26,4 @@ protected:
 	FloatNode(const char* num);
 };
 
-#endif //_FLOATNODE_H
+}

@@ -11,6 +11,8 @@
  * FloatNode implementation
  */
 
+namespace fir {
+	
 FloatNode::FloatNode(const char* num) {
 	value = atof(num);
 }
@@ -30,3 +32,5 @@ float FloatNode::getFloat() {
 void FloatNode::printSelf() {
 	Node::el.print(string_format("%f.2", value));
 }
+
+ }

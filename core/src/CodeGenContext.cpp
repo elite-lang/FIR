@@ -13,6 +13,9 @@
 
 using namespace std;
 
+
+namespace fir {
+
 LValue CodeGenContext::MacroMake(Node* node) {
 	if (node == NULL) return NULL;
 
@@ -201,4 +204,6 @@ void CodeGenContext::Init() {
 CodeGenContext::~CodeGenContext() {
 	delete st;
 	delete codeGenerator;
+}
+
 }

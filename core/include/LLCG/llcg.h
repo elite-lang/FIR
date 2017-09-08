@@ -16,7 +16,10 @@
 #include <vector>
 
 using namespace std;
+using namespace fir;
+using namespace fir;
 
+namespace fir {
 
 /**
  * @brief 核心接口类 底层代码生成器 Low-Level Code Generator
@@ -92,3 +95,4 @@ public:
 	virtual ~llcg() {};
 };
 
+}

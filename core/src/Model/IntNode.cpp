@@ -8,10 +8,15 @@
 #include <stdio.h>
 #include "../../headerlibs/elegantlist.hpp"
 #include "Utils/string_formatter.h"
+
 /**
  * IntNode implementation
  */
 
+
+namespace fir {
+
+	
 IntNode* IntNode::Create(const char* num) {
 	return new IntNode(num);
 }
@@ -26,4 +31,7 @@ void IntNode::printSelf() {
 
 NodeType IntNode::getType() {
 	return int_node_t;
+}
+
+
 }

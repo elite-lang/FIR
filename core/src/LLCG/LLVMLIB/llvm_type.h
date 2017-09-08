@@ -11,14 +11,18 @@
 
 #include "LLCG/lvalue.h"
 
-class llvm_type;
-
-typedef llvm_type* LLVMType;
-#define LLTYPE(T) (dynamic_cast<llvm_type*>(T))
 
 namespace llvm {
 	class Type;
 } // llvm
+
+namespace fir {
+	
+class llvm_type;
+
+typedef llvm_type* LLVMType;
+#define LLTYPE(T) (dynamic_cast<fir::llvm_type*>(T))
+
 
 class llvm_type : public lvalue
 {
@@ -34,3 +38,4 @@ private:
 	llvm::Type* data;
 };
 
+}

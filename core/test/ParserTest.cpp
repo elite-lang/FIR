@@ -26,6 +26,7 @@ __PARSER_TEST__(Construction)
 __PARSER_TEST__(TestPrasing)
 {
     CodeGen* codegen = RedCodeGen::Create();
+    
     Node* ans = parseFile("test.fir");
     codegen->Init();
     codegen->PreScan(ans);

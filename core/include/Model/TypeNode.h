@@ -5,9 +5,7 @@
 * @Last Modified time: 2015-11-25 15:47:07
 */
 
-#ifndef TYPE_NODE_H
-#define TYPE_NODE_H
-
+#pragma once
 #include "Node.h"
 #include <string>
 using namespace std;
@@ -15,6 +13,8 @@ using namespace std;
 namespace llvm {
 	class Type;
 } // llvm
+
+namespace fir {
 
 class TypeNode: public Node {
 public: 
@@ -44,4 +44,4 @@ protected:
 
 
 
-#endif // TYPE_NODE_H
+}

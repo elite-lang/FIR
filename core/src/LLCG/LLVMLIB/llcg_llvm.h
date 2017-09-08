@@ -28,6 +28,8 @@
 
 using namespace llvm;
 
+namespace fir {
+
 typedef void (*LibFunc)(Module*);
 
 class llcg_llvm : public llcg
@@ -128,3 +130,4 @@ protected:
 };
 
 
+}

@@ -5,11 +5,11 @@
 * @Last Modified time: 2015-12-14 16:56:32
 */
 
-
-#ifndef CODE_GEN_H
-#define CODE_GEN_H
+#pragma once
 
 #include <set>
+
+namespace fir {
 
 class Node;
 
@@ -33,4 +33,4 @@ public:
 	virtual ~CodeGen() {};
 };
 
-#endif // CODE_GEN_H
+}

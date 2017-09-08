@@ -1,14 +1,14 @@
-#ifndef PASS_H
-#define PASS_H
-
+#pragma once
 
 #include <string>
 #include <map>
 #include <stack>
-using namespace std;
-
 #include "CodeGenFunction.h"
 
+using namespace std;
+
+
+namespace fir {
 
 class Pass {
 public:
@@ -82,4 +82,4 @@ protected:
 };
 
 
-#endif /* end of include guard: PASS_H */
+}

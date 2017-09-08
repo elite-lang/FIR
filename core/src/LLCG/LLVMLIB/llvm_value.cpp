@@ -11,6 +11,8 @@
 
 using namespace llvm;
 
+namespace fir {
+
 llvm_value::llvm_value(llvm::Value* v) {
 	data = v;
 }
@@ -23,4 +25,6 @@ string llvm_value::getTypeName() {
 	Type* t = data->getType();
 	StructType* st = (StructType*)(t->getPointerElementType());
 	return st->getName().str();
+}
+
 }

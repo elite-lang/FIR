@@ -1,10 +1,10 @@
-#ifndef IDMAP_H
-#define IDMAP_H
-
+#pragma once
 #include "LLCG/lvalue.h"
 #include <map>
 
 using namespace std;
+
+namespace fir {
 
 /**
  * 符号表中符号的基本类型
@@ -60,4 +60,4 @@ private:
     map<string,id*> ID_map;
 };
 
-#endif // IDMAP_H
+}

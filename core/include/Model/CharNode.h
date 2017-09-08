@@ -2,11 +2,11 @@
  * Project Untitled
  */
 
-
-#ifndef _CHARNODE_H
-#define _CHARNODE_H
+#pragma once
 
 #include "Node.h"
+
+namespace fir {
 
 
 class CharNode: public Node {
@@ -20,4 +20,5 @@ public:
 	// virtual Value* codeGen(CodeGenContext* context); 
 };
 
-#endif //_CHARNODE_H
+
+}

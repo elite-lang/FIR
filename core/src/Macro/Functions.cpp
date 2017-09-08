@@ -15,6 +15,8 @@
 
 using namespace std;
 
+namespace fir {
+
 static LValue function_macro(CodeGenContext* context, Node* node) {
 	// 第二个参数, 函数名
 	node = node->getNext();
@@ -382,3 +384,5 @@ extern const FuncReg macro_funcs[] = {
 	//{"import",   import_macro}, // 实验型导入功能,最后应从库中删除
 	{NULL, NULL}
 };
+
+}

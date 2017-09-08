@@ -13,6 +13,8 @@
 #include <vector>
 #include <string>
 
+namespace fir {
+
 /**
  * @brief 函数模型元类型
  */
@@ -59,3 +61,4 @@ private:
 };
 
 
+}

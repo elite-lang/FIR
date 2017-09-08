@@ -11,6 +11,8 @@
 #include "Model/Node.h"
 #include "MetaModel.h"
 
+namespace fir {
+
 /**
  * @brief 宏模型元类型
  */
@@ -31,3 +33,4 @@ private:
 };
 
 
+}

@@ -1,5 +1,7 @@
 #include "idmap.h"
 
+namespace fir {
+
 IDMap::IDMap()
 {
 }
@@ -29,4 +31,6 @@ void IDMap::insert(const string& str, int level, SymbolType type, LValue data) {
 	i->type = type;
 	i->data = data;
     ID_map[str] = i;
+}
+
 }

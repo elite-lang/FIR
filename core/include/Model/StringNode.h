@@ -5,13 +5,13 @@
 * @Last Modified time: 2015-11-25 15:46:49
 */
 
-#ifndef STRING_NODE_H
-#define STRING_NODE_H
-
+#pragma once
 #include "Node.h"
 #include <string>
 
 using namespace std;
+
+namespace fir {
 
 class StringNode : public Node
 {
@@ -34,4 +34,4 @@ private:
 
 
 
-#endif // STRING_NODE_H
+}

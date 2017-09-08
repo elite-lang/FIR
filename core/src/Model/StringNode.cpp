@@ -10,6 +10,9 @@
 #include "../../headerlibs/elegantlist.hpp"
 #include "Utils/StringEscape.h"
 
+namespace fir {
+	
+
 StringNode::StringNode(const char* _value){
 	string data = _value;
 	if (data[0] == '@')
@@ -37,4 +40,6 @@ void StringNode::printSelf() {
 
 NodeType StringNode::getType() {
 	return string_node_t;
+}
+
 }

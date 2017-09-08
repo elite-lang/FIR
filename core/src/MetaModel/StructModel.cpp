@@ -9,7 +9,8 @@
 #include "CodeGenContext.h"
 #include "idtable.h"
 
-
+namespace fir {
+	
 
 StructModel::StructModel(std::string& name,
 		std::vector<std::string>& type_list,
@@ -64,4 +65,6 @@ void StructModel::genMetaCode(CodeGenContext* context) {
 
 MetaType StructModel::getMetaType() {
 	return struct_meta_t;
+}
+
 }

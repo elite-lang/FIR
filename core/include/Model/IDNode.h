@@ -2,14 +2,14 @@
  * Project Untitled
  */
 
-
-#ifndef _IDNODE_H
-#define _IDNODE_H
+#pragma once
 
 #include "Node.h"
 #include <string>
 
 using namespace std;
+
+namespace fir {
 
 class IDNode: public Node {
 public: 
@@ -29,4 +29,4 @@ private:
 	string value;
 };
 
-#endif //_IDNODE_H
+}

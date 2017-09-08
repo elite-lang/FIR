@@ -8,6 +8,8 @@
 #include "MetaModel/MetaModel.h"
 #include "CodeGenContext.h"
 
+namespace fir {
+
 MetaModel::MetaModel(std::string name) {
 	this->name = name;
 }
@@ -22,4 +24,6 @@ MetaModel* MetaModel::readJson() {
 
 MetaModel* MetaModel::readMetaCode() {
 	return NULL;
+}
+
 }
