@@ -10,10 +10,13 @@ using namespace fir;
 #define SAVE_STRING    yylval->str = maketoken(yytext, yyleng)
 #define SAVE_STRING_NC yylval->str = maketoken(yytext, yyleng)
 char* maketoken(const char* data, int len);
+
+#define YY_DECL int yylex(YYSTYPE * yylval_param , yyscan_t yyscanner, module *mod)
 %}
 
 %option yylineno
 %option reentrant bison-bridge noyywrap
+
 %%
 
 "/*"([^\*]|(\*)*[^\*/])*(\*)*"*/" ; /* 就是这种注释 */
@@ -22,7 +25,7 @@ char* maketoken(const char* data, int len);
 "//"[^\n]*\n            ; /* 双线注释 */
 
 [ \t\v\f]               ; /* 过滤空白字符 */
-\n|\r\n|\r              ; /* 处理回车符 */
+\n|\r\n|\r              if (mod->at_line_end) {mod->at_line_end=false; return ';'; } /* 处理回车符 */
 
     /* 一些双元运算符 */
 "++"                    return PP;

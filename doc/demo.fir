@@ -1,6 +1,9 @@
 import 'stdlib' // = import all items to local env
 import map, map_call from 'map' // import some part to local env
-let x = import 'nfunc'
+import 'nfunc' as nf // import and rename
+
+
+
 
 def for_demo(int x, string y) {
     for (int i = 0; i < 10; ++i) { // 标准C循环

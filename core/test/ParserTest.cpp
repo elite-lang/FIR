@@ -10,27 +10,18 @@
 
 #include <gtest/gtest.h>
 #include <string>
-#include "Model/nodes.h"
 #include "RedCodeGen.h"
-#include "cmdline.h"
 #include "fir.h"
 using namespace std;
 
-#define __PARSER_TEST__(name) TEST(ParserTest_##name, name)
 
-__PARSER_TEST__(Construction)
+TEST(ParserTest, Construction)
 {
     CodeGen* codegen = RedCodeGen::Create();
 }
 
-__PARSER_TEST__(TestPrasing)
+TEST(ParserTest, TestParse)
 {
-    CodeGen* codegen = RedCodeGen::Create();
-    
-    Node* ans = parseFile("test.fir");
-    codegen->Init();
-    codegen->PreScan(ans);
-    codegen->Make(ans, "test.bc", "main");
-    codegen->MakeMeta("meta.bc", "meta");
-    delete codegen;
+    FirVM* vm = createFirVM();
+    firLoadString(vm, "// normal function\nvoid Hello() {\nprintf(\"Hello\")\n}");
 }

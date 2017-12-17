@@ -8,8 +8,9 @@ extern "C" {
 
 typedef struct {
 	FILE *src;
-	char* buffer;
+	const char* buffer;
 	fir::Node *root;
+	bool at_line_end;
 } module;
 
 module *new_module_from_stdin();

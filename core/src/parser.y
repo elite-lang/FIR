@@ -1,6 +1,6 @@
 %start program
 %define api.pure full
-%lex-param {void *scanner}
+%lex-param {void *scanner}{module *mod}
 %parse-param {void *scanner}{module *mod}
 
 %define parse.trace
@@ -12,12 +12,16 @@
 #include <list>
 #include "module.h"
 #include "parser.hpp"
+
+#define YY_DECL int yylex(YYSTYPE * yylval_param , yyscan_t yyscanner, module *mod)
 #include "scanner.h"
+extern int yylex (YYSTYPE * yylval_param , yyscan_t yyscanner, module *mod);
+
+
 using namespace std;
 using namespace fir;
 
 void yyerror (yyscan_t locp, module *mod, char const *msg);
-
 %}
 
 %code requires
@@ -90,7 +94,7 @@ void yyerror (yyscan_t locp, module *mod, char const *msg);
 %type <nodes> new_expr delete_expr
 %type <nodes> var_exp
 %type <nodes> macro_call_args
-%type <nodes> list full_list woven_state
+%type <nodes> list full_list woven_state line_end
 
 
 
@@ -117,8 +121,14 @@ void yyerror (yyscan_t locp, module *mod, char const *msg);
 program : def_statements { mod->root = Node::getList($1); }
         ;
 
+line_action : %empty { mod->at_line_end = true; printf("hello"); }
+            ;
+
+line_end : line_action ';' 
+         ;
+
 def_module_statement : KWS_STRUCT ID '{' def_statements '}' { $$ = Node::make_list(3, IDNode::Create($1), IDNode::Create($2), $4); }
-                     | KWS_STRUCT ID ';' { $$ = Node::make_list(3, IDNode::Create($1), IDNode::Create($2), Node::Create()); }
+                     | KWS_STRUCT ID line_end { $$ = Node::make_list(3, IDNode::Create($1), IDNode::Create($2), Node::Create()); }
                      ;
 
 def_module_statements  : def_module_statement { $$ = Node::getList($1); }
@@ -148,7 +158,7 @@ statements : statement { $$ = Node::getList($1); }
            ;
 
 statement : def_statement
-          | expr ';' { $$ = $1; }
+          | expr line_end { $$ = $1; }
           | block
           | if_state
           | while_state
@@ -156,7 +166,7 @@ statement : def_statement
           | dountil_state
           | for_state
           | return_state
-          | delete_expr ';' { $$ = $1; }
+          | delete_expr line_end { $$ = $1; }
           ;
 
 if_state : IF '(' expr ')' statement { $$ = Node::make_list(3, IDNode::Create("if"), $3, $5); }
@@ -166,9 +176,9 @@ if_state : IF '(' expr ')' statement { $$ = Node::make_list(3, IDNode::Create("i
 while_state : WHILE '(' expr ')' statement { $$ = Node::make_list(3, IDNode::Create("while"), $3, $5); }
             ;
 
-dowhile_state : DO statement WHILE '(' expr ')' ';' { $$ = Node::make_list(3, IDNode::Create("dowhile"), $2, $5); }
+dowhile_state : DO statement WHILE '(' expr ')' line_end { $$ = Node::make_list(3, IDNode::Create("dowhile"), $2, $5); }
               ;
-dountil_state : DO statement UNTIL '(' expr ')' ';' { $$ = Node::make_list(3, IDNode::Create("dountil"), $2, $5); }
+dountil_state : DO statement UNTIL '(' expr ')' line_end { $$ = Node::make_list(3, IDNode::Create("dountil"), $2, $5); }
               ;
 
 for_state : FOR '(' expr ';' expr ';' expr ')' statement { $$ = Node::make_list(5, IDNode::Create("for"), $3, $5, $7, $9); }
@@ -179,8 +189,8 @@ for_state : FOR '(' expr ';' expr ';' expr ')' statement { $$ = Node::make_list(
           | FOR '(' var_def OF expr ')' statement { $$ = Node::make_list(4, IDNode::Create("foreach"), 0, Node::Create($3), $5); }
           ;
 
-return_state : RETURN ';' { $$ = IDNode::Create("return"); }
-             | RETURN expr ';' { $$ = IDNode::Create("return"); $$->addBrother($2); }
+return_state : RETURN line_end { $$ = IDNode::Create("return"); }
+             | RETURN expr line_end { $$ = IDNode::Create("return"); $$->addBrother($2); }
 
 woven_state : WOVEN ID '(' call_args ')' { $$ = Node::make_list(2, IDNode::Create("woven"), IDNode::Create($2)); $$->addBrother($4); }
             ;
@@ -216,7 +226,7 @@ macro_call : '@' ID { $$ = IDNode::Create($2); }
 
 func_def : types ID '(' func_def_args ')' block
             { $$ = Node::make_list(5, IDNode::Create("function"), $1, IDNode::Create($2), $4, $6); }
-         | types ID '(' func_def_args ')' ';'
+         | types ID '(' func_def_args ')' line_end
             { $$ = Node::make_list(5, IDNode::Create("function"), $1, IDNode::Create($2), $4, Node::Create()); }
          ;
 

@@ -26,10 +26,6 @@
 using namespace llvm;
 using namespace std;
 
-namespace llvm {
-	class ExecutionEngine;
-};
-
 namespace fir {
 
 class JITEngine_private
@@ -59,7 +55,6 @@ public:
                 .setMCJITMemoryManager(std::unique_ptr<RTDyldMemoryManager>(RTDyldMM))
                 .setOptLevel(CodeGenOpt::Default)
                 .create();
-
         } else
             EE->addModule(std::move(Owner));
         if (ErrStr.length() != 0)
@@ -67,8 +62,15 @@ public:
         EE->finalizeObject();
     }
 
-    void runFunction() {
+    GenericValue runFunction(std::string name, ArrayRef< GenericValue > ArgValues) {
+        return EE->runFunction(EE->FindFunctionNamed(name.c_str()), ArgValues);
+    }
 
+    int runMain(const std::vector< std::string > &argv, const char *const *envp) {
+        EE->runStaticConstructorsDestructors(false);
+        int ans = EE->runFunctionAsMain(EE->FindFunctionNamed("main"), argv, envp);
+        EE->runStaticConstructorsDestructors(true);
+        return ans;
     }
 
 };

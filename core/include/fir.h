@@ -8,18 +8,18 @@
 #include "Model/nodes.h"
 extern "C" {
 
-extern fir::Node* parseFile(const char* path);
+extern fir::Node* firParseFile(const char* path);
+extern fir::Node* firParseString(const char *string);
 
-extern struct FirVM* createVM();
-extern void deleteVM(struct FirVM*);
+extern struct FirVM* createFirVM();
+extern void deleteFirVM(struct FirVM*);
 
-extern bool loadNode(struct FirVM*, fir::Node*);
+extern bool firLoadNode(struct FirVM*, fir::Node*, const char* output_name);
 
-extern bool loadFile(struct FirVM*, const char* path);
+extern bool firLoadFile(struct FirVM*, const char* path);
+extern bool firLoadString(struct FirVM *, const char *path);
 
-extern int runMain(struct FirVM*);
-
-
+extern int firRunMain(struct FirVM *);
 };
 
 #endif //FIR_FIR_H

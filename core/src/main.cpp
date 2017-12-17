@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 		cout << parser.rest()[i] << endl;
 
 	string file_in_name = parser.rest()[0];
-	Node* ans = parseFile(file_in_name.c_str());
+	Node *ans = firParseFile(file_in_name.c_str());
 
 	// 语法生成
 	char* output_name = make_default_name(file_in_name.c_str());

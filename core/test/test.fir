@@ -1,9 +1,9 @@
 // normal function
 void Hello() {
-    printf("Hello");
+    printf("Hello")
 }
 
 int main() {
-    Hello();
-    return 0;
+    Hello()
+    return 0
 }
