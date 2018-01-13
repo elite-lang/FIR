@@ -11,17 +11,17 @@
 #include <gtest/gtest.h>
 #include <string>
 #include "RedCodeGen.h"
-#include "fir.h"
+// #include "fir.h"
 using namespace std;
 
 
 TEST(ParserTest, Construction)
 {
-    CodeGen* codegen = RedCodeGen::Create();
+    // CodeGen* codegen = RedCodeGen::Create();
 }
 
-TEST(ParserTest, TestParse)
-{
-    FirVM* vm = createFirVM();
-    firLoadString(vm, "// normal function\nvoid Hello() {\nprintf(\"Hello\")\n}");
-}
+// TEST(ParserTest, TestParse)
+// {
+//     // FirVM* vm = createFirVM();
+//     // firLoadString(vm, "// normal function\nvoid Hello() {\nprintf(\"Hello\")\n}");
+// }

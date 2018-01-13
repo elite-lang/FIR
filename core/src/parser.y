@@ -6,7 +6,6 @@
 %define parse.trace
 %define parse.error verbose
 
-
 %{
 #include "Model/nodes.h"
 #include <list>
@@ -37,15 +36,11 @@ void yyerror (yyscan_t locp, module *mod, char const *msg);
     int token;
 }
 
-
-
-/* Define our terminal symbols (tokens). This should
-
-   match our tokens.l lex file. We also define the node type
-
-   they represent.
-
- */
+/* 
+    Define our terminal symbols (tokens). This should
+    match our tokens.l lex file. We also define the node type
+    they represent.
+*/
 
 %token <str> ID INTEGER DOUBLE
 %token <token> CEQ CNE CGE CLE MBK
@@ -113,8 +108,6 @@ void yyerror (yyscan_t locp, module *mod, char const *msg);
 %right '~' PP SS
 %left '(' '[' ')' ']'
 %left MBK '@'
-
-
 
 %%
 
